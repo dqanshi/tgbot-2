@@ -351,8 +351,7 @@ def left_member(update: Update, context: CallbackContext):
 
 @user_admin
 def welcome(update: Update, context: CallbackContext):
-    bot = context.bot
-    args = context.args
+    bot, args = context.bot, context.args
     chat = update.effective_chat  # type: Optional[Chat]
     # if no args, show current replies.
     if len(args) == 0 or args[0].lower() == "noformat":
@@ -414,8 +413,7 @@ def welcome(update: Update, context: CallbackContext):
 
 @user_admin
 def goodbye(update: Update, context: CallbackContext):
-    bot = context.bot
-    args = context.args
+    bot, args = context.bot, context.args
     chat = update.effective_chat  # type: Optional[Chat]
 
     if len(args) == 0 or args[0] == "noformat":
@@ -559,8 +557,7 @@ def reset_goodbye(update: Update, context: CallbackContext) -> str:
 @user_admin
 @loggable
 def safemode(update: Update, context: CallbackContext) -> str:
-    bot = context.bot
-    args = context.args
+    bot, args = context.bot, context.args
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     msg = update.effective_message  # type: Optional[Message]
@@ -598,8 +595,7 @@ def safemode(update: Update, context: CallbackContext) -> str:
 @user_admin
 @loggable
 def clean_welcome(update: Update, context: CallbackContext) -> str:
-    bot = context.bot
-    args = context.args
+    bot, args = context.bot, context.args
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
 
@@ -641,8 +637,7 @@ def clean_welcome(update: Update, context: CallbackContext) -> str:
 @user_admin
 @loggable
 def del_joined(update: Update, context: CallbackContext) -> str:
-    bot = context.bot
-    args = context.args
+    bot, args = context.bot, context.args
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
 
@@ -791,8 +786,7 @@ def getTimeSetting(update: Update, context: CallbackContext):
 
 @user_admin
 def setTimeSetting(update: Update, context: CallbackContext):
-    bot = context.bot
-    args = context.args
+    bot, args = context.bot, context.args
     chat = update.effective_chat
     msg = update.effective_message
     if args[0] == "false" or args[0] == "off":
@@ -824,8 +818,7 @@ def get_version(update: Update, context: CallbackContext):
 
 
 def caschecker(update: Update, context: CallbackContext):
-    bot = context.bot
-    args = context.args
+    bot, args = context.bot, context.args
     #/info logic
     msg = update.effective_message  # type: Optional[Message]
     user_id = extract_user(update.effective_message, args)
@@ -877,8 +870,7 @@ def caschecker(update: Update, context: CallbackContext):
 #this sends direct request to combot server. Will return true if user is banned, false if
 #id invalid or user not banned
 def casquery(update: Update, context: CallbackContext):
-    bot = context.bot
-    args = context.args
+    bot, args = context.bot, context.args
     msg = update.effective_message  # type: Optional[Message]
     try:
         user_id = msg.text.split(' ')[1]
