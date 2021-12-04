@@ -143,9 +143,16 @@ def start(update: Update, context: CallbackContext):
         else:
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(PM_START_TEXT.format(
-                escape_markdown(first_name), escape_markdown(bot.first_name),
-                escape_markdown(bot.username)),
+                escape_markdown(first_name), escape_markdown(bot.first_name)),
                                                 parse_mode=ParseMode.MARKDOWN,
+                                                reply_markup=InlineKeyboardMarkup([[
+                                                        InlineKeyboardButton(text="Add me to your group !",
+                                                                              url="t.me/{}?startgroup=true".format(
+                                                                              bot.username))
+                                                        ], [
+                                                        InlineKeyboardButton(text="Need some help ?",
+                                                                              url="t.me/{}?start=help".format(
+                                                                              bot.username))]]),
                                                 disable_web_page_preview=True)
     else:
         update.effective_message.reply_text("Yo, whadup?")
@@ -408,9 +415,19 @@ def donate(update: Update, context: CallbackContext):
     user = update.effective_message.from_user
     chat = update.effective_chat  # type: Optional[Chat]
 
-    update.effective_message.reply_text("teamtrees.org",
-                                        parse_mode=ParseMode.MARKDOWN,
-                                        disable_web_page_preview=True)
+    if chat.type == "private":
+        update.effective_message.reply_text(DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+
+        update.effective_message.reply_text("You can also donate to my creator, SonOfLars, for all his work to get me where i am now. There are two ways of paying him: [PayPal](paypal.me/PaulSonOfLars), or [Monzo](monzo.me/paulnionvestergaardlarsen).",
+                                                parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+
+    else:
+        try:
+            bot.send_message(user.id, DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+
+            update.effective_message.reply_text("I've PM'ed you about donating to my owner!")
+        except Unauthorized:
+            update.effective_message.reply_text("Contact me in PM first to get donation information.")
 
 
 def source(update: Update, context: CallbackContext):
