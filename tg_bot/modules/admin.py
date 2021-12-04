@@ -1,4 +1,5 @@
 import html
+import time
 from typing import Optional, List
 
 from telegram import Message, Chat, Update, Bot, User, ChatPermissions
@@ -63,6 +64,7 @@ def promote(update: Update, context: CallbackContext, check="restrict") -> str:
         can_pin_messages=bot_member.can_pin_messages)
 
     text = ""
+    time.sleep(3)
     if title:
         bot.set_chat_administrator_custom_title(chat_id, user_id, title[:16])
         text = " with title <code>{}</code>".format(title[:16])
