@@ -14,6 +14,9 @@ from tg_bot.modules.helper_funcs.extraction import extract_user, extract_user_an
 from tg_bot.modules.helper_funcs.filters import CustomFilters
 from tg_bot.modules.helper_funcs.misc import send_to_list
 from tg_bot.modules.sql.users_sql import get_all_chats
+from SiestaRobot import DRAGONS as SUDO_USERS
+from SiestaRobot import DEMONS as SUPPORT_USERS
+
 
 GBAN_ENFORCE_GROUP = 6
 
